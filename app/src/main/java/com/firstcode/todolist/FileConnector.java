@@ -18,7 +18,7 @@ public class FileConnector {
 
         try {
 
-            FileOutputStream fos = context.openFileOutput(FILENAME,context.MODE_PRIVATE);
+            FileOutputStream fos = context.openFileOutput(FILENAME,Context.MODE_PRIVATE);
             ObjectOutputStream oas = new ObjectOutputStream(fos);
             oas.writeObject(item);
             oas.close();
