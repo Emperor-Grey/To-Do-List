@@ -1,5 +1,3 @@
-Apologies for the misunderstanding. Here's an updated version of the documentation, focusing on the features of adding and deleting tasks in your To-Do List APK.
-
 # To-Do List APK Documentation
 
 ## Overview
