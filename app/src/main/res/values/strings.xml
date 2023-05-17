@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Experiment</string>
+    <string name="app_name">Notes</string>
     <string name="tasks">Tasks</string>
     <string name="add">Add New Task</string>
     <string name="title">Title</string>

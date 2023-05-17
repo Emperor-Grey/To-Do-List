@@ -17,6 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -97,34 +98,30 @@ public class MainActivity extends AppCompatActivity {
         AppCompatEditText TaskDescription = view.findViewById(R.id.newDescription);
         AppCompatButton AddNewTask = view.findViewById(R.id.AddButton);
 
-        AddNewTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        AddNewTask.setOnClickListener(v -> {
 
-                String title = null, description = null;
+            String title = null, description = null;
 
-                dialog.dismiss();
+            dialog.dismiss();
 
-
-                // ADDING NEW TASKS
-                if(!titleName.getText().toString().equals("")) {
-                    title = titleName.getText().toString();
-                }
-                if(!TaskDescription.getText().toString().equals("")){
-                    description = TaskDescription.getText().toString();
-                }
-
-                //Accessing from the constructor from the model class to add
-                TaskList.add(new TaskModalClass(title , description)); // v need to make the scope available so
-                //making them null to Access
-
-
-                // Now Adapting this
-                adapter.notifyItemInserted(TaskList.size()-1);
-
-                //if v have More data then i want the the app to scroll to that position for the user Experience
-                recyclerView.scrollToPosition(TaskList.size()-1);   // passing same position see
+            // ADDING NEW TASKS
+            if(!Objects.requireNonNull(titleName.getText()).toString().equals("")) {
+                title = titleName.getText().toString();
             }
+            if(!Objects.requireNonNull(TaskDescription.getText()).toString().equals("")){
+                description = TaskDescription.getText().toString();
+            }
+
+            //Accessing from the constructor from the model class to add
+            TaskList.add(new TaskModalClass(title , description)); // v need to make the scope available so
+            //making them null to Access
+
+
+            // Now Adapting this
+            adapter.notifyItemInserted(TaskList.size()-1);
+
+            //if v have More data then i want the the app to scroll to that position for the user Experience
+            recyclerView.scrollToPosition(TaskList.size()-1);   // passing same position see
         });
 
         //Setting the content View to Dialogue

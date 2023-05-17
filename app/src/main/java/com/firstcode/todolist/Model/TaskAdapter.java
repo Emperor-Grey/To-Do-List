@@ -11,19 +11,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.firstcode.todolist.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> { // Passing my View Holder in <>
     // its Located Down
 
-    private Context context;
-    private ArrayList<TaskModalClass> TaskList;
+    private final Context context;
+    private final ArrayList<TaskModalClass> TaskList;
 
     public TaskAdapter(Context context, ArrayList<TaskModalClass> taskList) {
         this.context = context;
@@ -48,48 +48,41 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
         TaskModalClass model = TaskList.get(position);
         holder.CardViewTitle.setText(model.getTitle());
         holder.CardViewDescription.setText(model.getDescription());
-        holder.MyCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.MyCard.setOnClickListener(v -> {
 
-                // Creating new Dialogue to Update shit
-                Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.update_task);
+            // Creating new Dialogue to Update shit
+            Dialog dialog = new Dialog(context);
+            dialog.setContentView(R.layout.update_task);
 
-                // Finding the Id of the update shit
-                AppCompatEditText Title = v.findViewById(R.id.UpdateTitle);
-                AppCompatEditText description = v.findViewById(R.id.UpdateDescription);
-                AppCompatButton Update = v.findViewById(R.id.UpdateButton);
-                AppCompatTextView heading = v.findViewById(R.id.UpdateHeading);
+            // Finding the Id of the update shit
+            AppCompatEditText Title = v.findViewById(R.id.UpdateTitle);
+            AppCompatEditText description = v.findViewById(R.id.UpdateDescription);
+            AppCompatButton Update = v.findViewById(R.id.UpdateButton);
 
-                Title.setText((TaskList.get(holder.getAdapterPosition())).getTitle());
-                description.setText(TaskList.get(holder.getAdapterPosition()).getDescription());
+            Title.setText((TaskList.get(holder.getAdapterPosition())).getTitle());
+            description.setText(TaskList.get(holder.getAdapterPosition()).getDescription());
 
-                Update.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+            Update.setOnClickListener(v1 -> {
 
-                        String title = null, SampleDescription = null;
+                String title = null, SampleDescription = null;
 
-                        // UPDATING NEW TASKS
-                        if(!Title.getText().toString().equals("")) {
-                            title = Title.getText().toString();
-                        }
-                        if(!description.getText().toString().equals("")){
-                            SampleDescription = description.getText().toString();
-                        }
+                // UPDATING NEW TASKS
+                if(!Objects.requireNonNull(Title.getText()).toString().equals("")) {
+                    title = Title.getText().toString();
+                }
+                if(!Objects.requireNonNull(description.getText()).toString().equals("")){
+                    SampleDescription = description.getText().toString();
+                }
 
-                        // What Do i need to Update
-                        TaskList.set(holder.getAdapterPosition(), new TaskModalClass(title , SampleDescription));
-                        // we need to let the recycler View that v Changed Something
-                        notifyItemChanged(holder.getAdapterPosition());
+                // What Do i need to Update
+                TaskList.set(holder.getAdapterPosition(), new TaskModalClass(title , SampleDescription));
+                // we need to let the recycler View that v Changed Something
+                notifyItemChanged(holder.getAdapterPosition());
 
-                        dialog.dismiss();
+                dialog.dismiss();
 
-                    }
-                });
-                dialog.show();
-            }
+            });
+            dialog.show();
         });
     }
 
@@ -101,12 +94,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
 
     // View Holder
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView CardViewTitle;
-        private TextView CardViewDescription;
+        private final TextView CardViewTitle;
+        private final TextView CardViewDescription;
 
-        private RelativeLayout MyCard;
+        private final RelativeLayout MyCard;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
