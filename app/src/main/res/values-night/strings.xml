@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Experiment</string>
+    <string name="tasks">Tasks</string>
+    <string name="add">Add New Task</string>
+    <string name="title">Title</string>
+    <string name="this_is_a_dummy_text_or_the_task_maybe_description">This is a dummy text or the task maybe description</string>
+    <string name="new_task">Title</string>
+    <string name="description">Description</string>
+    <string name="Add_Button">Add</string>
+    <string name="update">Update</string>
+    <string name="edit">Edit</string>
+</resources>
