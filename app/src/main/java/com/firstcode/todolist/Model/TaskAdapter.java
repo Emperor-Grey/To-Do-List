@@ -55,9 +55,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
             dialog.setContentView(R.layout.update_task);
 
             // Finding the Id of the update shit
-            AppCompatEditText Title = v.findViewById(R.id.UpdateTitle);
-            AppCompatEditText description = v.findViewById(R.id.UpdateDescription);
-            AppCompatButton Update = v.findViewById(R.id.UpdateButton);
+            AppCompatEditText Title = dialog.findViewById(R.id.UpdateTitle);
+            AppCompatEditText description = dialog.findViewById(R.id.UpdateDescription);
+            AppCompatButton Update = dialog.findViewById(R.id.UpdateButton);
 
             Title.setText((TaskList.get(holder.getAdapterPosition())).getTitle());
             description.setText(TaskList.get(holder.getAdapterPosition()).getDescription());
