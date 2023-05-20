@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,6 +48,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
         TaskModalClass model = TaskList.get(position);
         holder.CardViewTitle.setText(model.getTitle());
         holder.CardViewDescription.setText(model.getDescription());
+
+        //Updating the Shit
+
         holder.MyCard.setOnClickListener(v -> {
 
             // Creating new Dialogue to Update shit
@@ -86,6 +90,26 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
             });
             dialog.show();
         });
+
+        // For Deleting The Shit....
+        holder.MyCard.setOnLongClickListener(v -> {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                    .setTitle("Delete")
+                    .setMessage("Do You Want To Delete This ?")
+                    .setIcon(R.drawable.baseline_delete_24)
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        TaskList.remove(holder.getAdapterPosition());
+                        notifyItemChanged(holder.getAdapterPosition());
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+
+                    });
+            builder.show();
+
+            return false;
+        });
+
     }
 
     //Implemented Method
