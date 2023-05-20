@@ -1,6 +1,5 @@
 package com.firstcode.todolist.Model;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.firstcode.todolist.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -51,7 +50,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
         holder.MyCard.setOnClickListener(v -> {
 
             // Creating new Dialogue to Update shit
-            Dialog dialog = new Dialog(context);
+            BottomSheetDialog dialog = new BottomSheetDialog(context);
             dialog.setContentView(R.layout.update_task);
 
             // Finding the Id of the update shit
@@ -59,9 +58,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
             AppCompatEditText description = dialog.findViewById(R.id.UpdateDescription);
             AppCompatButton Update = dialog.findViewById(R.id.UpdateButton);
 
+            assert Title != null;
             Title.setText((TaskList.get(holder.getAdapterPosition())).getTitle());
+            assert description != null;
             description.setText(TaskList.get(holder.getAdapterPosition()).getDescription());
 
+            assert Update != null;
             Update.setOnClickListener(v1 -> {
 
                 String title = null, SampleDescription = null;
