@@ -19,7 +19,7 @@ public class Splash_Screen extends AppCompatActivity {
         //Setting the splash Screen v need holder to hold that
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-            Intent i = new Intent(Splash_Screen.this , MainActivity.class);
+            Intent i = new Intent(Splash_Screen.this, MainActivity.class);
             startActivity(i);
             finish();
         },3000);
