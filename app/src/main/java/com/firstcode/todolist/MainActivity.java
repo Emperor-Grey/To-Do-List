@@ -1,6 +1,8 @@
 package com.firstcode.todolist;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -21,6 +23,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,12 +63,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.RecyclerView);
         //Database
         nbd = Room.databaseBuilder(getApplicationContext(), NoteDataBase.class, "My DataBase")
-                .allowMainThreadQueries()
+                .allowMainThreadQueries()  // -> Not Recommended
                 .build();
 
         //TaskLists
         TaskLists = new ArrayList<>();
-        TaskLists.addAll(nbd.noteDao().getAllNotes());
+        /*TaskLists.addAll(nbd.noteDao().getAllNotes());  if u used allowMainThreadQueries();
+        if not then use separate Thread so will write it in a thread */
+        DisplayAllTasksInBackGround();
 
         //Adapter
         notesAdapter = new NotesAdapter(this , TaskLists , MainActivity.this , nbd);
@@ -128,4 +134,23 @@ public class MainActivity extends AppCompatActivity {
 
         dialog.setContentView(view);
     }
+
+    private void DisplayAllTasksInBackGround(){
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        // handler to handle executor
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(() -> {
+
+            //Executing The Background Work
+            //Getting all the Tasks from the App DataBase
+            TaskLists.addAll(nbd.noteDao().getAllNotes());
+
+            //Executed After the BackGround Work Has Finished
+            handler.post(() -> notesAdapter.notifyDataSetChanged());
+        });
+
+    }
+
 }
