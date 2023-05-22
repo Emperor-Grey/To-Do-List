@@ -3,7 +3,7 @@
 ## Overview:
 The To-Do List APK is an Android application designed to help users manage their tasks and stay organized. This documentation provides an overview of the application, its features, and instructions for installation and usage.
 
-This is My First Project ....
+This is My First Project
 
 ## Features:
 Task Management:
@@ -58,8 +58,5 @@ Task Management:
 4. Confirm the deletion by tapping the "Yes" button.
 5. The task will be permanently deleted from the task list.
 
-## Know Issues
-1. The App On Re-Open Dosen't Remember AnyThing.. Yes I Haven't Written The Code For It.The Next Update Will Contain That Thank You
-
 ## Conclusion:
-This documentation has provided an overview of the To-Do List APK, its installation process, and instructions for using its features. By following these guidelines, users can effectively manage their tasks, update task details, and delete tasks as needed, helping them stay organized and efficient in their daily activities.
+This documentation has provided an overview of the To-Do List APK, its installation process, and instructions for using its features. By following these guidelines, users can effectively manage their tasks, update task details, and delete tasks as needed, helping them stay organized and efficient in their daily activities. The application also utilizes Room for data storage, enabling seamless storage, retrieval, update, and deletion of tasks.
